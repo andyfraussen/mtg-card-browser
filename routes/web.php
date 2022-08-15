@@ -14,3 +14,5 @@ use App\Http\Controllers\PageController;
 */
 
 Route::get('/', [PageController::class, 'index']);
+Route::get('/sets/{setCode}', [PageController::class, 'setIndex']);
+Route::get('/sets/{setCode}/{number}', [PageController::class, 'setCardShow']);
