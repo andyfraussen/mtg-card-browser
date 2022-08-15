@@ -33,13 +33,13 @@ class AppServiceProvider extends ServiceProvider
                     'name' => $e->name,
                     'type' => $e->type,
                     'code' => $e->code,
-                    'releaseDate' => $e->releaseDate,
+                    'date' => $e->releaseDate,
                 ];
             }, $sets);
 
             usort($sets, function ($element1, $element2) {
-                $datetime1 = strtotime($element1['releaseDate']);
-                $datetime2 = strtotime($element2['releaseDate']);
+                $datetime1 = strtotime($element1['date']);
+                $datetime2 = strtotime($element2['date']);
                 return $datetime1 - $datetime2;
             });
 
