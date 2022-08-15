@@ -16,20 +16,23 @@ class PageController extends Controller
 
     public function setIndex($setCode)
     {
-        $card = mtgsdk\Card::where([
+        $cards = mtgsdk\Card::where([
             'set' => $setCode,
-            'number' => 1
         ])->all();
 
         $card = array_map(function ($e){
+            if (isset($e->imageUrl))
             return [
                 'name' => $e->name,
                 'artist' => $e->artist,
                 'image' => $e->imageUrl,
                 'number' => $e->number,
             ];
-        }, $card);
+        }, $cards);
 
+        if (!$card[0]){
+            return back();
+        }
         return view('sets.index', [
             'set' => $setCode,
             'card' => $card[0]
@@ -41,9 +44,11 @@ class PageController extends Controller
             'set' => $setCode,
             'number' => $number
         ])->all();
+
         if (!$card){
             return back();
         }
+
         $card = array_map(function ($e){
             return [
                 'name' => $e->name,
