@@ -63,4 +63,20 @@ class PageController extends Controller
             'card' => $card[0]
         ]);
     }
+
+    public function setCardList($setCode){
+
+        $cards = mtgsdk\Card::where([
+            'set' => $setCode,
+        ])->all();
+
+        $cards = array_map(function ($e){
+            if (isset($e->imageUrl))
+                return [
+                    'name' => $e->name,
+                ];
+        }, $cards);
+
+        return view('sets.list', ['cards' => $cards]);
+    }
 }
