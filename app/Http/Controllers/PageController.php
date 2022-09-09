@@ -21,18 +21,19 @@ class PageController extends Controller
         ])->all();
 
         $card = array_map(function ($e){
-            if (isset($e->imageUrl))
             return [
-                'name' => $e->name,
-                'artist' => $e->artist,
-                'image' => $e->imageUrl,
-                'number' => $e->number,
+                'name' => isset($e->name) ? $e->name : null,
+                'artist' => isset($e->artist) ? $e->artist : null,
+                'image' => isset($e->imageUrl) ? $e->imageUrl : null,
+                'number' => isset($e->number) ? $e->number : null,
+                'text' => isset($e->text) ? $e->text : null,
             ];
         }, $cards);
 
         if (!$card[0]){
             return back();
         }
+
         return view('sets.index', [
             'set' => $setCode,
             'card' => $card[0]
@@ -51,10 +52,11 @@ class PageController extends Controller
 
         $card = array_map(function ($e){
             return [
-                'name' => $e->name,
-                'artist' => $e->artist,
-                'image' => $e->imageUrl,
-                'number' => $e->number,
+                'name' => isset($e->name) ? $e->name : null,
+                'artist' => isset($e->artist) ? $e->artist : null,
+                'image' => isset($e->imageUrl) ? $e->imageUrl : null,
+                'number' => isset($e->number) ? $e->number : null,
+                'text' => isset($e->text) ? $e->text : null,
             ];
         }, $card);
 
